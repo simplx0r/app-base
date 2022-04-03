@@ -1,0 +1,24 @@
+.app {
+
+    // Цвет с макета
+    --clr1: #5D5FEF;
+    --clr-foreground: #e5e5e5;
+    // Немного затеняем background для контраста
+    --clr-background: #ffffff;
+    --clr-display: #F3F4F6;
+
+    /* text */
+    --clr-text: #6B7280;
+    --fsz: 16px;
+    --fw--light: 300;
+    --fw--regular: 400;
+    --fw--medium: 500;
+
+    /* misc */
+    --transition: 0.25s;
+    --radius: 10px;
+
+    /* fonts */
+    --ff-primary: 'Inter Medium', sans-serif;
+    --ff-secondary: 'Roboto Mono', monospace;
+}
