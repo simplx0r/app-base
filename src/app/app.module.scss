@@ -1,12 +1,10 @@
-
 // css-переменные проекта
-@import "./styles/vars.scss";
+@import "./styles/vars";
+
 // нормализация стилей проекта
-@import "./styles/normalize.scss";
-
-@import "./styles/utils.scss";
-
-@import "./styles/fonts.scss";
+@import "./styles/normalize";
+@import "./styles/utils";
+@import "./styles/fonts";
 
 .app {
     display: flex;
@@ -21,5 +19,4 @@
     .page {
         margin: 20px 10%;
     }
-
 }

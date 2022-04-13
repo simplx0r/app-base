@@ -91,6 +91,7 @@ module.exports = {
     'unicorn/no-useless-promise-resolve-reject': 1,
     'unicorn/consistent-destructuring': 1,
     'import/extensions': 0,
+    'import/prefer-default-export': 0,
 
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.tsx'] }],
 
