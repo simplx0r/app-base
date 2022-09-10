@@ -40,6 +40,19 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb/hooks',
+
+  ],
+  overrides: [
+    {
+      // enable eslint-plugin-testing-library rules or preset only for matching files!
+      files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+      extends: ['plugin:jest/recommended', 'plugin:jest-dom/recommended', 'plugin:testing-library/react'],
+    },
+    {
+      files: ['**/*.ts?(x)'],
+      parser: '@typescript-eslint/parser',
+      extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript'],
+    },
   ],
   rules: {
     // imports
@@ -95,6 +108,17 @@ module.exports = {
 
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.tsx'] }],
 
+  },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {},
+    },
+    react: {
+      version: 'detect',
+    },
   },
 
 };
