@@ -107,7 +107,7 @@ module.exports = {
     'import/prefer-default-export': 0,
 
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.tsx'] }],
-
+    'react/function-component-definition': 0,
   },
   settings: {
     'import/parsers': {

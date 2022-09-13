@@ -72,7 +72,7 @@
     "lint:fix": "eslint src --fix && stylelint **/*.scss --fix",
     "deps:clean": "git clean -fxd",
     "deps:reinstall": "yarn-upgrade-all",
-    "type-scss": "typed-scss-modules src"
+    "type-scss": "typed-scss-modules -watch trues src"
   },
   "eslintConfig": {
     "extends": [
