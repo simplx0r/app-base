@@ -1,5 +1,5 @@
 import React from 'react';
-import scss from './header.module.scss';
+import s from './header.module.scss';
 
 const links = [{
   name: 'Яндекс',
@@ -9,11 +9,11 @@ const links = [{
 
 function Header() {
   return (
-    <header className={scss.container}>
+    <header className={s.container}>
       {links.map(({ name, url }) => (
-        <a href={url} className={scss.link}>
+        <a href={url} className={s.link}>
           {name}
-          <img src="1" alt="" className={scss.logo} />
+          <img src="1" alt="" className={s.logo} />
         </a>
       ))}
 
