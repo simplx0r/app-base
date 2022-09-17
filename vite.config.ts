@@ -7,7 +7,23 @@ import svgrPlugin from 'vite-plugin-svgr';
 // eslint-disable-next-line import/no-unused-modules
 export default defineConfig({
   envDir: './env',
-  plugins: [react(), tsconfigPaths(), svgrPlugin()],
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          [
+            'babel-plugin-styled-components',
+            {
+              displayName: true,
+              fileName: false,
+            },
+          ],
+        ],
+      },
+    }),
+    tsconfigPaths(),
+    svgrPlugin(),
+  ],
   /* If proxy is needed
   server: {
     proxy: {
@@ -15,6 +31,7 @@ export default defineConfig({
     }
   },
   */
+
   build: {
     sourcemap: true,
   },
