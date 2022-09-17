@@ -6,14 +6,15 @@
 @import "./styles/utils";
 @import "./styles/fonts";
 
+@import "./styles/mixin";
+
 .app {
     display: flex;
     flex-direction: column;
     max-width: var(--container-width);
     font-family: var(--ff-primary);
     background-color: var(--clr-background);
-    padding-left:var(--container-paddingX);
-    padding-right: var(--container-paddingX);
+
 
     &-content {
         flex-grow: 1;

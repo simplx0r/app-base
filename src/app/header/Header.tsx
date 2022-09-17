@@ -9,15 +9,26 @@ const links = [{
 
 function Header() {
   return (
-    <header className={s.container}>
-      {links.map(({ name, url }) => (
-        <a href={url} className={s.link}>
-          {name}
-          <img src="1" alt="" className={s.logo} />
-        </a>
-      ))}
+    <>
+      <header className="header">
+        {links.map(({ name, url }) => (
+          <a href={url} className="header__link">
+            {name}
+            <img src="1" alt="" className="header__logo" />
+          </a>
+        ))}
 
-    </header>
+      </header>
+      <header className="mobileHeader">
+        {links.map(({ name, url }) => (
+          <a href={url} className="header__link">
+            {name}
+            <img src="1" alt="" className="header__link" />
+          </a>
+        ))}
+
+      </header>
+    </>
   );
 }
 export { Header };

@@ -1,6 +1,6 @@
 .app {
     --container-paddingX: 60px;
-    --container-width: 1200px;
+    --container-width: 1440px;
     // Цвет с макета
     --clr1: #5D5FEF;
     --clr-foreground: #e5e5e5;
@@ -19,7 +19,16 @@
     --transition: 0.25s;
     --radius: 10px;
 
+
     /* fonts */
     --ff-primary: 'Inter Medium', sans-serif;
     --ff-secondary: 'Roboto Mono', monospace;
+    --ff-heading: 'Poppins';
+    --ff-paragraph: 'Lato';
+
+    $vsm: 320px;
+    $sm: 480px;
+    $tablet: 768px;
+    $xl: 1200px;
+    $xxl: 1400px;
 }
