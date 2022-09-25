@@ -63,57 +63,77 @@ const fonts = [{
   weight: 400,
   url: PoppinsWoff2,
   format: 'woff2',
-}].reduce((acc, {
+}].reduce((cssFonts, {
   family, weight, url, format,
 }) => {
   // eslint-disable-next-line no-param-reassign
-  acc += `@font-face {
-  font-family: ${family};
-  src: url(${url}) format(${format});
-  font-weight:${weight};`;
-  return acc;
+  cssFonts += `@font-face {
+  font-family: "${family}";
+  src: url("${url}") format("${format}");
+  font-weight: ${weight};`;
+  return cssFonts;
 }, '');
 
 const allFonts = css`${fonts}`;
 
-const insertFont = (family: string, weight: number, size: number, lineHeight: number, spacing?: number) => css`
+console.log(allFonts);
+
+const font = (family: string, size: number, lineHeight: number, spacing?: number, weight = 400) => css`
   font-family:${family};
   font-weight:${weight};
-  font-size:${size};
+  font-size:${`${size}px`};
   letter-spacing: ${spacing || 'normal'};
-  line-height: ${lineHeight};
+  line-height: ${`${lineHeight}px`};
     `;
 const sizes = {
   mediaQuery: {
     sm: '540px',
     md: '768px',
+    lg: '1025px',
+    xxl: '1220px',
   },
   containerPadding: '20px',
 };
-const media = (size: keyof typeof sizes.mediaQuery, content: FlattenSimpleInterpolation) => css`
-@media screen and (max-width: ${sizes.mediaQuery[size]}) {
+const media = (size: keyof typeof sizes.mediaQuery | Array<keyof typeof sizes.mediaQuery>, content: FlattenSimpleInterpolation) => css`
+${Array.isArray(size) ? size.reduce((acc, singleSize) => acc += `@media screen and (max-width: ${sizes.mediaQuery[singleSize]}) {
 ${content}
-}
+}`, '') : `@media screen and (max-width: ${sizes.mediaQuery[size]}) {
+${content}
+}`}
 
 `;
 const colorsObject = { header: ['#fff', '#000'] };
 
-const swap = (value: string[]) => value.forEach((item) => {
-  if (value.length !== 2) return;
-  let l = item;
-  let r = value.at(-1);
-  if (l && r) {
-    const tmp = l;
-    l = r;
-    r = tmp;
-  }
-});
-
-const centered = css`
+const swap = (value: string[]) => {
+  value.forEach((item, index) => {
+    let l = item;
+    let r = value[-index - 1];
+    if (l && r) {
+      const tmp = l;
+      l = r;
+      r = tmp;
+    }
+  });
+  return value;
+};
+const flex = {
+  centeredCol: css`
     display: flex;
     align-items: center;
     justify-content: center;
-`;
+    flex-direction:column;
+`,
+  centeredRow: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`,
+  sb: css`display: flex;
+    justify-content:space-between;`,
+  column: css`display: flex;
+  flex-direction: column;`,
+
+};
 
 const createGrid = (cols: number, rows:number, width = '100%', height = '100%') => css`
 display: grid;
@@ -139,5 +159,5 @@ const useTheme = () => {
 };
 
 export {
-  swap, media, insertFont, useTheme, sizes, allFonts, centered, createGrid, background,
+  media, font, useTheme, sizes, allFonts, createGrid, background, flex,
 };
