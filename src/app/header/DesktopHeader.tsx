@@ -2,12 +2,12 @@ import styled, { css } from 'styled-components';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  flex, font, media, sizes,
+  mixins, sizes,
 } from 'shared';
 import logo from './logo.png';
 
-const HeaderContainer = styled.header`
-${media(['sm', 'md'], css`display: none;`)}
+const HeaderWrapper = styled.header`
+${mixins.media(['sm', 'md'], css`display: none;`)}
   position: sticky;
   width: 100%;
   justify-items:center;
@@ -15,7 +15,8 @@ ${media(['sm', 'md'], css`display: none;`)}
   height: 70px;
   padding-left: 20px;
   background: #46716e;
-  ${flex.sb}
+  max-width:${sizes.mediaQuery.xxl};
+  ${mixins.flex.sb}
 `;
 
 const Logo = styled.img`
@@ -23,10 +24,8 @@ const Logo = styled.img`
   max-height: 32px;
   border-radius: 16px;`;
 const HeaderLink = styled(Link)`
-  width: fit-content;
-  height: fit-content;
   color: #fff;
- ${font('Poppins', 16, 16, 16)}
+ ${mixins.font('Poppins', 16, 16, '#000')}
   transition: 0.4s ease-in;
   text-decoration: unset;
   
@@ -34,6 +33,8 @@ const HeaderLink = styled(Link)`
  color: #faff;
 }
 `;
+
+
 interface Link {
     url: string;
     name: string;
@@ -44,10 +45,12 @@ interface DesktopHeaderProps {
 function DesktopHeader({ links }: DesktopHeaderProps) {
   return (
 
-    <HeaderContainer>
-      <Logo src={logo} />
-      {links.map(({ url, name }) => <HeaderLink to={url}>{name}</HeaderLink>)}
-    </HeaderContainer>
+    <HeaderWrapper>
+      <HeaderContainer>
+        <Logo src={logo} />
+        {links.map(({ url, name }) => <HeaderLink to={url}>{name}</HeaderLink>)}
+      </HeaderContainer>
+    </HeaderWrapper>
 
   );
 }

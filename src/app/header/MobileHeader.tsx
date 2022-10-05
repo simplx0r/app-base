@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import React, { useState } from 'react';
-import { flex, media, sizes } from 'shared';
+import { mixins, sizes } from 'shared';
 import logo from './logo.png';
 
 const MobileHeaderContainer = styled.div`
@@ -8,9 +8,8 @@ position: sticky;
 display:none;
 width:100%;
 background:#424242;
-  padding-right: ${sizes.containerPadding};
-  padding-left: ${sizes.containerPadding};
-${media(['sm', 'md'], css`${flex.sb}`)}
+${mixins.p.x(sizes.containerPadding)}
+${mixins.media(['sm', 'md'], css`${mixins.flex.sb}`)}
 `;
 
 const Burger = styled.span<{clicked: boolean}>`

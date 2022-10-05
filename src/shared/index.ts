@@ -76,15 +76,6 @@ const fonts = [{
 
 const allFonts = css`${fonts}`;
 
-console.log(allFonts);
-
-const font = (family: string, size: number, lineHeight: number, spacing?: number, weight = 400) => css`
-  font-family:${family};
-  font-weight:${weight};
-  font-size:${`${size}px`};
-  letter-spacing: ${spacing || 'normal'};
-  line-height: ${`${lineHeight}px`};
-    `;
 const sizes = {
   mediaQuery: {
     sm: '540px',
@@ -94,70 +85,87 @@ const sizes = {
   },
   containerPadding: '20px',
 };
-const media = (size: keyof typeof sizes.mediaQuery | Array<keyof typeof sizes.mediaQuery>, content: FlattenSimpleInterpolation) => css`
+
+const colors = { header: ['#fff', '#000'] };
+
+const mixins = {
+  flex: {
+    centeredCol: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+`,
+    centeredRow: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`,
+    sb: css`display: flex;
+    justify-content:space-between;`,
+    column: css`display: flex;
+  flex-direction: column;`,
+  },
+  p: {
+    x: (pX: number) => css`padding-left: ${pX}px; padding-right: ${pX}px;`,
+    y: (pY: number) => css`padding-top: ${pY}px; padding-bottom:${pY}px;`,
+  },
+  media: (size: keyof typeof sizes.mediaQuery | Array<keyof typeof sizes.mediaQuery>, content: FlattenSimpleInterpolation) => css`
 ${Array.isArray(size) ? size.reduce((acc, singleSize) => acc += `@media screen and (max-width: ${sizes.mediaQuery[singleSize]}) {
 ${content}
 }`, '') : `@media screen and (max-width: ${sizes.mediaQuery[size]}) {
 ${content}
 }`}
 
-`;
-const colorsObject = { header: ['#fff', '#000'] };
-
-const swap = (value: string[]) => {
-  value.forEach((item, index) => {
-    let l = item;
-    let r = value[-index - 1];
-    if (l && r) {
-      const tmp = l;
-      l = r;
-      r = tmp;
-    }
-  });
-  return value;
-};
-const flex = {
-  centeredCol: css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction:column;
 `,
-  centeredRow: css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`,
-  sb: css`display: flex;
-    justify-content:space-between;`,
-  column: css`display: flex;
-  flex-direction: column;`,
-
-};
-
-const createGrid = (cols: number, rows:number, width = '100%', height = '100%') => css`
+  swap: (value: string[]) => {
+    value.forEach((item, index) => {
+      let l = item;
+      let r = value[-index - 1];
+      if (l && r) {
+        const tmp = l;
+        l = r;
+        r = tmp;
+      }
+    });
+    return value;
+  },
+  font: (family: string, size: number, lineHeight: number, color: string, spacing: string | number = 'normal', weight = 400) => css`
+  font-family:${family};
+  font-weight:${weight};
+  font-size:${`${size}px`};
+  letter-spacing: ${spacing || 'normal'};
+  line-height: ${`${lineHeight}px`};
+  color: ${color};
+    `,
+  grid: (cols: number, rows:number, width = '100%', height = '100%') => css`
 display: grid;
 width: ${width};
 height:${height};
 grid-template-columns:repeat(${cols}, 1fr);
 grid-template-rows:repeat(${rows}, 1fr);
-`;
+`,
+  //   container: css`
+  //   Object.keys(sizes.mediaQuery).reduce((acc, query)=>{
+  // acc+=mixins.media(query as typeof keyof sizes.mediaQuery, css`max-width:${sizes.mediaQuery[query as typeof keyof sizes.mediaQuery]};`), ''})
+  //   `
+
+};
 
 const background = (url: string) => css`
 background: url(${url});
 background-repeat: no-repeat;
-
 `;
-const useTheme = () => {
-  const choosenTheme = useStore(currentTheme);
-  const colors = useMemo(() => Object.values(colorsObject).reduce((colorAcc, [element, color]) => {
-    // eslint-disable-next-line no-param-reassign
-    colorAcc[element as keyof typeof colorsObject] = choosenTheme === 'dark' ? color[1] : color[0];
-    return colorAcc;
-  }, {} as Record<keyof typeof colorsObject, string>), [choosenTheme]);
-  return colors;
-};
+// const useTheme = () => {
+//   const choosenTheme = useStore(currentTheme);
+//   const colors = useMemo(() => Object.values(colorsObject).reduce((colorAcc, [element, color]) => {
+//     // eslint-disable-next-line no-param-reassign
+//     colorAcc[element as keyof typeof colorsObject] = choosenTheme === 'dark' ? color[1] : color[0];
+//     return colorAcc;
+//   }, {} as Record<keyof typeof colorsObject, string>), [choosenTheme]);
+//   return colors;
+// };
 
 export {
-  media, font, useTheme, sizes, allFonts, createGrid, background, flex,
+  mixins, sizes, allFonts, background, colors,
 };
