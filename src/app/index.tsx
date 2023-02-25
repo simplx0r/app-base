@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { css, createGlobalStyle } from 'styled-components';
+import { createGlobalStyles } from 'goober/global';
 import { allFonts, reset } from 'shared';
 import { Routing } from 'pages';
-import { Header } from './header';
 
 import { withRouter } from './providers';
+import { Header } from './header';
 
-export const Reset = createGlobalStyle`${reset} ${allFonts}`;
+export const Reset = createGlobalStyles`${reset} ${allFonts}`;
 
 function App() {
   return (

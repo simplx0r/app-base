@@ -21,11 +21,7 @@
     "jsx": "react",
     "types": ["vite-plugin-svgr/client", "jest","@testing-library/jest-dom"]
   },
-  "plugins": [
-    {
-      "name": "typescript-plugin-css-modules"
-    }
-  ],
+  "plugins": [],
   "include": [
     "src"
   ]

@@ -105,6 +105,7 @@ module.exports = {
     'unicorn/consistent-destructuring': 1,
     'import/extensions': 0,
     'import/prefer-default-export': 0,
+    'linebreak-style': 0,
 
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.tsx'] }],
     'react/function-component-definition': 0,

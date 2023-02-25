@@ -1,9 +1,9 @@
-import { useStore } from 'effector-react';
+
 import { useMemo } from 'react';
 import {
-  css, FlattenSimpleInterpolation,
-} from 'styled-components';
-import { currentTheme } from 'app/store/events';
+  css,
+} from 'goober'
+
 import PoppinsTtf from '../app/fonts/poppins.ttf';
 import PoppinsWoff2 from '../app/fonts/poppins.woff2';
 import PoppinsWoff from '../app/fonts/poppins.woff';
@@ -89,7 +89,7 @@ const sizes = {
   },
   containerPadding: '20px',
 };
-const media = (size: keyof typeof sizes.mediaQuery, content: FlattenSimpleInterpolation) => css`
+const media = (size: keyof typeof sizes.mediaQuery, content: string) => css`
 @media screen and (max-width: ${sizes.mediaQuery[size]}) {
 ${content}
 }
@@ -107,16 +107,8 @@ const swap = (value: string[]) => value.forEach((item) => {
     r = tmp;
   }
 });
-const useTheme = () => {
-  const choosenTheme = useStore(currentTheme);
-  const colors = useMemo(() => Object.values(colorsObject).reduce((colorAcc, [element, color]) => {
-    // eslint-disable-next-line no-param-reassign
-    colorAcc[element as keyof typeof colorsObject] = choosenTheme === 'dark' ? color[1] : color[0];
-    return colorAcc;
-  }, {} as Record<keyof typeof colorsObject, string>), [choosenTheme]);
-  return colors;
-};
+
 
 export {
-  swap, media, insertFont, useTheme, sizes, allFonts,
+  swap, media, insertFont,  sizes, allFonts,
 };

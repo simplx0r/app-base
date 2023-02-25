@@ -2,6 +2,9 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import svgrPlugin from 'vite-plugin-svgr';
+import UnoCSS from 'unocss/vite'
+import presetUno from '@unocss/preset-uno'
+
 
 // https://vitejs.dev/config/
 // eslint-disable-next-line import/no-unused-modules
@@ -23,6 +26,9 @@ export default defineConfig({
     }),
     tsconfigPaths(),
     svgrPlugin(),
+    UnoCSS({ presets: [
+        presetUno()
+    ]}),
   ],
   /* If proxy is needed
   server: {
